@@ -21,6 +21,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -87,33 +88,40 @@ public class MainActivity extends AppCompatActivity {
 
     // Accessing File from External Storage
     public ArrayList<File> findSongs(File file) {
-        if(file.exists()) {
-            ArrayList<File> arrayList = new ArrayList<>();
-            File[] files = file.listFiles();
 
-            if (files != null) {
-                for (File singleFile : files) {
+        ArrayList<File> arrayList = new ArrayList<>();
+        File[] files = file.listFiles();
 
-                    if (singleFile.isDirectory() && !singleFile.isHidden()) {
-                        Toast.makeText(this, "Find Directorry", Toast.LENGTH_SHORT).show();
-                        arrayList.addAll(findSongs(singleFile));
-                    } else {
-                        if (singleFile.getName().toLowerCase().endsWith(".mp3") || singleFile.getName().endsWith(".wav")) {
-                            Toast.makeText(this, "find a mp3 file", Toast.LENGTH_SHORT).show();
-                            arrayList.add(singleFile);
-                        }
+        if (files != null) {
+            for (File singleFile : files) {
+
+                if (singleFile.isDirectory() && !singleFile.isHidden()) {
+                    Toast.makeText(this, "Find Directorry", Toast.LENGTH_SHORT).show();
+                    arrayList.addAll(findSongs(singleFile));
+                } else {
+                    if (singleFile.getName().endsWith(".mp3") || singleFile.getName().endsWith(".wav")) {
+                        Toast.makeText(this, "find a mp3 file", Toast.LENGTH_SHORT).show();
+                        arrayList.add(singleFile);
                     }
                 }
-            } else {
-                Toast.makeText(this, "Directory Empty"+file.getPath().toString(), Toast.LENGTH_LONG).show();
             }
-            return arrayList;
+        } else {
+            Toast.makeText(this, "Directory Empty"+file.getPath().toString(), Toast.LENGTH_LONG).show();
         }
-        return null;
+        return arrayList;
     }
 
     public void displaySongs() {
+        File file = new File("/storage/emulated/0/music/laapata.mp3");
+        if(file != null) {
+            Toast.makeText(this, ""+file.getName().toString(), Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "File doesn't exists", Toast.LENGTH_SHORT).show();
+        }
 
+        Toast.makeText(this, ""+file.isFile(), Toast.LENGTH_SHORT).show();
+        
+        /*
         final ArrayList<File> mySongs = findSongs(Environment.getExternalStorageDirectory());
         items = new String[mySongs.size()];
 
@@ -122,6 +130,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        listView.setAdapter(arrayAdapter);
+        listView.setAdapter(arrayAdapter);*/
     }
 }
