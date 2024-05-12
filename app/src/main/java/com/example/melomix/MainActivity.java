@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         listView = findViewById(R.id.listView);
-        //runTimePermission();
+
+        //checking runTimePermission;
         if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
         != PackageManager.PERMISSION_GRANTED) {
 
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Permission is not granted", Toast.LENGTH_SHORT).show();
             }
         }else {
-            Toast.makeText(this, "Permission won't Granted", Toast.LENGTH_SHORT).show();
+            // another request code
         }
     }
 
@@ -112,14 +113,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void displaySongs() {
-        File file = new File("/storage/emulated/0/music/laapata.mp3");
+        File file = new File("/storage/emulated/0/music");
         if(file != null) {
             Toast.makeText(this, ""+file.getName().toString(), Toast.LENGTH_SHORT).show();
+            File[] files = file.listFiles();
+            if(files != null) Toast.makeText(this, "files array is not empty", Toast.LENGTH_SHORT).show();
+            else Toast.makeText(this, "files array is empty", Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(this, "File doesn't exists", Toast.LENGTH_SHORT).show();
         }
-
-        Toast.makeText(this, ""+file.isFile(), Toast.LENGTH_SHORT).show();
         
         /*
         final ArrayList<File> mySongs = findSongs(Environment.getExternalStorageDirectory());
