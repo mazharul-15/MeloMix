@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
             displaySongs();
         }
-        //displaySongs();
 
     }
 
@@ -97,11 +96,11 @@ public class MainActivity extends AppCompatActivity {
             for (File singleFile : files) {
 
                 if (singleFile.isDirectory() && !singleFile.isHidden()) {
-                    Toast.makeText(this, "Find Directorry", Toast.LENGTH_SHORT).show();
+                    ///Toast.makeText(this, "Find Directorry", Toast.LENGTH_SHORT).show();
                     arrayList.addAll(findSongs(singleFile));
                 } else {
                     if (singleFile.getName().endsWith(".mp3") || singleFile.getName().endsWith(".wav")) {
-                        Toast.makeText(this, "find a mp3 file", Toast.LENGTH_SHORT).show();
+                        ///Toast.makeText(this, "find a mp3 file", Toast.LENGTH_SHORT).show();
                         arrayList.add(singleFile);
                     }
                 }
@@ -113,25 +112,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void displaySongs() {
-        File file = new File("/storage/emulated/0/music");
+       /* File file = new File("/storage/emulated/0/music");
         if(file != null) {
-            Toast.makeText(this, ""+file.getName().toString(), Toast.LENGTH_SHORT).show();
+            ///Toast.makeText(this, ""+file.getName().toString(), Toast.LENGTH_SHORT).show();
             File[] files = file.listFiles();
             if(files != null) Toast.makeText(this, "files array is not empty", Toast.LENGTH_SHORT).show();
-            else Toast.makeText(this, "files array is empty", Toast.LENGTH_SHORT).show();
+            //else Toast.makeText(this, "files array is empty", Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(this, "File doesn't exists", Toast.LENGTH_SHORT).show();
-        }
+        }*/
         
-        /*
+
         final ArrayList<File> mySongs = findSongs(Environment.getExternalStorageDirectory());
         items = new String[mySongs.size()];
+        Toast.makeText(this, "Return from findSongs", Toast.LENGTH_SHORT).show();
 
         for (int i = 0; i < mySongs.size(); i++) {
             items[i] = mySongs.get(i).getName().toString().replace(".mp3", "").replace(".wav", "");
         }
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        listView.setAdapter(arrayAdapter);*/
+        listView.setAdapter(arrayAdapter);
     }
 }
