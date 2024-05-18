@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background_of_song_item_view">
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_of_song_item_view"
+    android:layout_margin="2dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/music_list_icon" >
+            android:src="@drawable/music_list_icon"/>
 
         <TextView
             android:id="@+id/song_item_name"
@@ -26,11 +27,14 @@
             android:layout_toEndOf="@+id/music_icon"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
+            android:padding="6dp"
             android:text="My Song Name........."
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/font_color"
             android:singleLine="true"
-            />
+            android:marqueeRepeatLimit="marquee_forever"
+            android:ellipsize="marquee"
+            android:scrollHorizontally="true"/>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

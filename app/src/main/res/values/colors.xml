@@ -2,6 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="main_ui">#F6FAFD</color>
     <color name="bg_song_item_view">#F6FAFD</color>
     <color name="font_color">#2B3033</color>
+    <color name="bdr_color_song_item">#2B3033</color>
 </resources>
