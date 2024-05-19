@@ -9,8 +9,13 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.karumi.dexter.Dexter;
@@ -96,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             for (File singleFile : files) {
 
                 if (singleFile.isDirectory() && !singleFile.isHidden()) {
-                    ///Toast.makeText(this, "Find Directorry", Toast.LENGTH_SHORT).show();
+                    ///Toast.makeText(this, "Find Directory", Toast.LENGTH_SHORT).show();
                     arrayList.addAll(findSongs(singleFile));
                 } else {
                     if (singleFile.getName().endsWith(".mp3") || singleFile.getName().endsWith(".wav")) {
@@ -131,7 +136,35 @@ public class MainActivity extends AppCompatActivity {
             items[i] = mySongs.get(i).getName().toString().replace(".mp3", "").replace(".wav", "");
         }
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        listView.setAdapter(arrayAdapter);
+        Myadapter myadapter = new Myadapter();
+        listView.setAdapter(myadapter);
+    }
+
+    class Myadapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return items.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = getLayoutInflater().inflate(R.layout.song_item_view, null);
+            TextView songName = (TextView) view.findViewById(R.id.song_item_name);
+            songName.setSelected(true);
+            songName.setText(items[position]);
+
+            return view;
+        }
     }
 }
