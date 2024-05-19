@@ -6,12 +6,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -45,12 +47,10 @@ public class MainActivity extends AppCompatActivity {
         //checking runTimePermission;
         if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
         != PackageManager.PERMISSION_GRANTED) {
-
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     EXTERNAL_STORAGE_REQUEST_CODE);
         }else {
-
             displaySongs();
         }
 
@@ -117,20 +117,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void displaySongs() {
-       /* File file = new File("/storage/emulated/0/music");
-        if(file != null) {
-            ///Toast.makeText(this, ""+file.getName().toString(), Toast.LENGTH_SHORT).show();
-            File[] files = file.listFiles();
-            if(files != null) Toast.makeText(this, "files array is not empty", Toast.LENGTH_SHORT).show();
-            //else Toast.makeText(this, "files array is empty", Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(this, "File doesn't exists", Toast.LENGTH_SHORT).show();
-        }*/
-        
 
         final ArrayList<File> mySongs = findSongs(Environment.getExternalStorageDirectory());
         items = new String[mySongs.size()];
-        Toast.makeText(this, "Return from findSongs", Toast.LENGTH_SHORT).show();
 
         for (int i = 0; i < mySongs.size(); i++) {
             items[i] = mySongs.get(i).getName().toString().replace(".mp3", "").replace(".wav", "");
@@ -138,6 +127,15 @@ public class MainActivity extends AppCompatActivity {
 
         Myadapter myadapter = new Myadapter();
         listView.setAdapter(myadapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getApplicationContext(), Song_Play_activity.class);
+                i.putExtra("songFiles", mySongs);
+                i.putExtra("position", position);
+                startActivity(i);
+            }
+        });
     }
 
     class Myadapter extends BaseAdapter {
