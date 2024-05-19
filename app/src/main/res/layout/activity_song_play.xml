@@ -1,9 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/main_ui"
+    android:gravity="center"
+    android:padding="15dp"
     tools:context=".Song_Play_activity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/song_name_image_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="Lapaata O Lapaata song of Ek tha tiger.mp3"
+            android:textSize="20sp"
+            android:textColor="@color/font_color"
+            android:textAlignment="center"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:ellipsize="marquee"/>
+
+        <ImageView
+            android:id="@+id/audio_track_img"
+            android:layout_width="200dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/ic_song_play_image"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/time_seek_bar"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/starting_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00"
+            android:textSize="15sp"
+            android:textAlignment="center"/>
+
+        <SeekBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5.00"
+            android:textSize="15sp"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:padding="10dp">
+
+        <ImageButton
+            android:id="@+id/fast_rewind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_fast_rewind_btn"
+            android:background="@color/main_ui"/>
+
+        <ImageButton
+            android:id="@+id/previous_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_previous_btn"
+            android:background="@color/main_ui" />
+
+        <ImageButton
+            android:id="@+id/play_pause_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_pause_btn"
+            android:background="@color/main_ui"/>
+
+        <ImageButton
+            android:id="@+id/next_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_next_btn"
+            android:background="@color/main_ui"/>
+        <ImageButton
+            android:id="@+id/fast_forward_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_fast_forward_btn"
+            android:background="@color/main_ui"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
