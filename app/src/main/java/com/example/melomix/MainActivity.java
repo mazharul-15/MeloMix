@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(getApplicationContext(), Song_Play_activity.class);
-                i.putExtra("songFiles", mySongs);
+                i.putExtra("songs", mySongs);
                 i.putExtra("position", position);
                 startActivity(i);
             }
