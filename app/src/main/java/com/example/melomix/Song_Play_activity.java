@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class Song_Play_activity extends AppCompatActivity {
     TextView txtSng, txtSngStart, txtSngEnd;
     SeekBar songSeek;
     ImageButton btnfr, btnprev, btnplay, btnnext, btnff;
+    ImageView audioTrackImg;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -33,11 +35,12 @@ public class Song_Play_activity extends AppCompatActivity {
         setContentView(R.layout.activity_song_play);
 
         txtSng = findViewById(R.id.song_name);
+        audioTrackImg = findViewById(R.id.audio_track_img);
         txtSngStart = findViewById(R.id.starting_time);
         txtSngEnd = findViewById(R.id.end_time);
 
         btnfr = findViewById(R.id.fast_rewind);
-        btnnext = findViewById(R.id.next_btn);
+        btnprev = findViewById(R.id.previous_btn);
         btnplay = findViewById(R.id.play_pause_btn);
         btnnext = findViewById(R.id.next_btn);
         btnff = findViewById(R.id.fast_forward_btn);
@@ -72,6 +75,42 @@ public class Song_Play_activity extends AppCompatActivity {
                     btnplay.setImageResource(R.drawable.ic_play_btn);
                     mediaPlayer.start();
                 }
+            }
+        });
+
+        /// next button
+        btnnext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaPlayer.stop();
+                mediaPlayer.release();
+
+                position = ((position + 1) % mySongs.size());
+                songName = mySongs.get(position).getName();
+                Uri uri = Uri.parse(mySongs.get(position).toString());
+
+                txtSng.setText(songName);
+                btnplay.setImageResource(R.drawable.ic_play_btn);
+                mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
+                mediaPlayer.start();
+            }
+        });
+
+        /// prev button
+        btnprev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaPlayer.stop();
+                mediaPlayer.release();
+
+                position = (position-1) < 0 ? mySongs.size()-1 : position - 1;
+                songName = mySongs.get(position).getName();
+                Uri uri = Uri.parse(mySongs.get(position).toString());
+
+                txtSng.setText(songName);
+                btnplay.setImageResource(R.drawable.ic_play_btn);
+                mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
+                mediaPlayer.start();
             }
         });
     }
