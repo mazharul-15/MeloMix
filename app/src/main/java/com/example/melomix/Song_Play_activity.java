@@ -2,6 +2,8 @@ package com.example.melomix;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -90,6 +92,7 @@ public class Song_Play_activity extends AppCompatActivity {
                 Uri uri = Uri.parse(mySongs.get(position).toString());
 
                 txtSng.setText(songName);
+                startAnimation(audioTrackImg, "next");
                 btnplay.setImageResource(R.drawable.ic_play_btn);
                 mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
                 mediaPlayer.start();
@@ -108,10 +111,24 @@ public class Song_Play_activity extends AppCompatActivity {
                 Uri uri = Uri.parse(mySongs.get(position).toString());
 
                 txtSng.setText(songName);
+                startAnimation(audioTrackImg, "prev");
                 btnplay.setImageResource(R.drawable.ic_play_btn);
                 mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
                 mediaPlayer.start();
             }
         });
+    }
+
+    public void startAnimation(View view, String direction)
+    {
+        ObjectAnimator animator = new ObjectAnimator();
+
+        if(direction == "next") animator = ObjectAnimator.ofFloat(view, "rotation", 0f, 360f);
+        else  animator = ObjectAnimator.ofFloat(view, "rotation", 360f, 0f);
+
+        animator.setDuration(1000);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(animator);
+        animatorSet.start();
     }
 }
